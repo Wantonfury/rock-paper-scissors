@@ -23,7 +23,7 @@ let intToString = int => {
 
 let computerPlay = () => Math.floor(Math.random() * 3);
 
-let playerPlay = () => stringToInt(prompt('Please choose between: rock, paper, scissors.').toLowerCase());
+let playerPlay = () => stringToInt(prompt('Please choose between: rock, paper, scissors.', 'rock').toLowerCase());
 
 let playRound = (playerSelection, computerSelection) => {
     if (playerSelection == computerSelection) return 'Draw! ' + intToString(playerSelection) + ' and ' + intToString(computerSelection) + '.';
