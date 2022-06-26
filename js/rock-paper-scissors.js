@@ -47,40 +47,6 @@ let playRound = (playerSelection, computerSelection) => {
     else return 'You Lose! ' + intToString(playerSelection) + ' and ' + intToString(computerSelection) + '.';
 }
 
-let game = () => {
-    let victories = 0;
-    
-    for (let i = 0; i < 5;) {
-        let playerSelection = playerPlay();
-        
-        while (playerSelection == 4) {
-            alert("Invalid choice.");
-            playerSelection = playerPlay();
-        }
-        
-        if (playerSelection == -1) {
-            alert('Match cancelled.');
-            return;
-        }
-        
-        let result = playRound(playerSelection, computerPlay());
-        
-        if (result.search('Win') != -1) {
-            ++victories;
-            ++i;
-        }
-        else if (result.search('Lose') != -1) {
-            ++i;
-        }
-        alert(result);
-    }
-    
-    let message;
-    if (victories >= 3) message = 'You won the match! ';
-    else  message = 'You lost the match! ' ;
-    
-    message += victories + ' - ' + Math.abs(5 - victories);
-    alert(message);
-}
+
 
 game();
