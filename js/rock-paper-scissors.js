@@ -6,6 +6,7 @@
 
 let stringToInt = string => {
     switch (string) {
+        case 'cancel': return -1;
         case 'rock': return 0;
         case 'paper': return 1;
         case 'scissors': return 2;
@@ -23,7 +24,12 @@ let intToString = int => {
 
 let computerPlay = () => Math.floor(Math.random() * 3);
 
-let playerPlay = () => stringToInt(prompt('Please choose between: rock, paper, scissors.', 'rock').toLowerCase());
+let playerPlay = () => {
+    let answer = prompt('Please choose between: rock, paper, scissors. Write or press Cancel to exit.', 'rock');
+    if (!answer) answer = 'cancel';
+    
+    return stringToInt(answer.toLowerCase());
+}
 
 let playRound = (playerSelection, computerSelection) => {
     if (playerSelection == computerSelection) return 'Draw! ' + intToString(playerSelection) + ' and ' + intToString(computerSelection) + '.';
@@ -46,9 +52,15 @@ let game = () => {
     
     for (let i = 0; i < 5;) {
         let playerSelection = playerPlay();
+        
         while (playerSelection == 4) {
             alert("Invalid choice.");
             playerSelection = playerPlay();
+        }
+        
+        if (playerSelection == -1) {
+            alert('Match cancelled.');
+            return;
         }
         
         let result = playRound(playerSelection, computerPlay());
