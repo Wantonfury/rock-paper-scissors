@@ -3,51 +3,41 @@
  * 1 - paper
  * 2 - scissors
  */
+const ID_PLAYER = 0;
+const ID_AI = 1;
 
-let stringToInt = string => {
-    switch (string) {
-        case 'cancel': return -1;
-        case 'rock': return 0;
-        case 'paper': return 1;
-        case 'scissors': return 2;
-        default: return 4;
-    }
-}
-
-let intToString = int => {
-    switch (int) {
-        case 0: return 'Rock';
-        case 1: return 'Paper';
-        case 2: return 'Scissors';
-    }
-}
+let score = [0, 0];
+let scoreResult = ['win', 'lose'];
 
 let computerPlay = () => Math.floor(Math.random() * 3);
 
-let playerPlay = () => {
-    let answer = prompt('Please choose between: rock, paper, scissors. Write or press Cancel to exit.', 'rock');
-    if (!answer) answer = 'cancel';
-    
-    return stringToInt(answer.toLowerCase());
+let scorePoint = id => {
+    ++score[id];
+    console.log('You ' + scoreResult[id]);
 }
 
-let playRound = (playerSelection, computerSelection) => {
-    if (playerSelection == computerSelection) return 'Draw! ' + intToString(playerSelection) + ' and ' + intToString(computerSelection) + '.';
+let draw = () => {
+    console.log('Draw!');
+}
+
+let playRound = (e) => {
+    let playerSelection = +e.target.dataset.selection;
+    let computerSelection = computerPlay();
     
-    let victory = 0;
-    
-    if (Math.abs(playerSelection - computerSelection) == 1) {
-        if (playerSelection > computerSelection) victory = 1;
+    if (playerSelection == computerSelection) draw();
+    else if (Math.abs(playerSelection - computerSelection) == 1) {
+        if (playerSelection > computerSelection) scorePoint(ID_PLAYER);
+        else scorePoint(ID_AI);
     }
     else {
-        if (playerSelection < computerSelection) victory = 1;
+        if (playerSelection < computerSelection) scorePoint(ID_PLAYER);
+        else scorePoint(ID_AI);
     }
-    
-    if (victory) return 'You Win! ' + intToString(playerSelection) + ' and ' + intToString(computerSelection) + '.';
-    else return 'You Lose! ' + intToString(playerSelection) + ' and ' + intToString(computerSelection) + '.';
 }
 
 
 
 
-game();
+const choices = document.querySelectorAll('button');
+
+choices.forEach(choice => choice.addEventListener('click', playRound));
