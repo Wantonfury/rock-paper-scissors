@@ -4,12 +4,41 @@
         <meta charset="UTF-8">
         <title>Rock, Paper, Scissors</title>
         <script src="js/rock-paper-scissors.js" defer></script>
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <div id="game-buttons">
-            <button data-selection="0">Rock</button>
-            <button data-selection="1">Paper</button>
-            <button data-selection="2">Scissors</button>
+        <div id="header">
+            <h1>ROCK PAPER SCISSORS</h1>
+        </div>
+        <div id="content">
+            <div id="results">
+                <div id="results-player">
+                    <h2>Player</h2>
+                    <h3></h3>
+                </div>
+                <div id="results-log">
+                    <ul>
+                        <li>You win!</li>
+                        <li>You win!</li>
+                        <li>You win!</li>
+                        <li>You win!</li>
+                        <li>You win!</li>
+                        <li>You win!</li>
+                    </ul>
+                </div>
+                <div id="results-ai">
+                    <h2>AI</h2>
+                    <h3></h3>
+                </div>
+            </div>
+            <div id="game-buttons">
+                <button data-selection="0"><img src="img/rock.png" alt="rock"></button>
+                <button data-selection="1"><img src="img/paper.png" alt="paper"></button>
+                <button data-selection="2"><img src="img/scissors.png" alt="scissors"></button>
+            </div>
+        </div>
+        <div id="footer">
+            <h5>Odin Project</h5>
         </div>
     </body>
 </html>
