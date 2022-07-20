@@ -15,6 +15,7 @@ const DRAW = 2;
 const btn = document.querySelectorAll('#game-buttons button');
 const scores = document.querySelectorAll('#results .results-score');
 const logContent = document.querySelector('#results-log h3');
+const btnRetry = document.querySelector('#roundEnd-btn');
 
 let selectionToWeapon = id => {
     switch (id) {
@@ -28,6 +29,10 @@ let computerPlay = () => Math.floor(Math.random() * 3);
 
 let log = str => {
     logContent.textContent = str;
+}
+
+let endRound = result => {
+    window.confirm("TEST");
 }
 
 let decideRound = (result, winnerWeapon, loserWeapon) => {
@@ -54,6 +59,9 @@ let decideRound = (result, winnerWeapon, loserWeapon) => {
     
     if (result != DRAW) message += " " + winnerWeapon + ' beats ' + loserWeapon + ".";
     log(message);
+    
+    if (scores[PLAYER_ID].textContent >= 5) endRound(PLAYER_VICTORY);
+    else if (scores[COMPUTER_ID].textContent >= 5) endRound(COMPUTER_VICTORY);
 }
 
 let playRound = e => {
@@ -75,10 +83,15 @@ let playRound = e => {
     }
 }
 
+let retry = () => {
+    window.alert("TEST");
+}
+
 let init = () => {
     scores.forEach(s => s.textContent = 0);
     logContent.textContent = '';
     
+    btnRetry.addEventListener('click', retry);
     btn.forEach(b => {
         b.addEventListener('click', playRound);
         const img = b.querySelector('img');
