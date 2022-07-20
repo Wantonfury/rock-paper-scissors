@@ -16,6 +16,9 @@ const btn = document.querySelectorAll('#game-buttons button');
 const scores = document.querySelectorAll('#results .results-score');
 const logContent = document.querySelector('#results-log h3');
 const btnRetry = document.querySelector('#roundEnd-btn');
+const modalText = document.querySelector('#roundEnd-text');
+const modal = document.querySelector('#roundEnd');
+const content = document.querySelector('#content');
 
 let selectionToWeapon = id => {
     switch (id) {
@@ -31,8 +34,21 @@ let log = str => {
     logContent.textContent = str;
 }
 
+let retry = () => {
+    modal.classList.remove('active');
+    scores[PLAYER_ID].textContent = 0;
+    scores[COMPUTER_ID].textContent = 0;
+    log('');
+    
+    content.classList.add('active');
+}
+
 let endRound = result => {
-    window.confirm("TEST");
+    if (result == PLAYER_VICTORY) modalText.textContent = 'You won!';
+    else modalText.textContent = 'You lost...';
+    
+    content.classList.remove('active');
+    modal.classList.add('active');
 }
 
 let decideRound = (result, winnerWeapon, loserWeapon) => {
@@ -83,10 +99,6 @@ let playRound = e => {
     }
 }
 
-let retry = () => {
-    window.alert("TEST");
-}
-
 let init = () => {
     scores.forEach(s => s.textContent = 0);
     logContent.textContent = '';
@@ -97,6 +109,8 @@ let init = () => {
         const img = b.querySelector('img');
         img.dataset.selection = b.dataset.selection;
     });
+    
+    content.classList.add('active');
 }
 
 init();

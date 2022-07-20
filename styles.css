@@ -23,6 +23,15 @@ body {
     color: white;
 }
 
+.main {
+    pointer-events: none;
+    user-select: none;
+}
+
+.main.active {
+    pointer-events: all;
+}
+
 #results {
     display: flex;
     justify-content: space-around;
@@ -174,6 +183,11 @@ button:active {
     
     border-radius: 20px;
     
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+}
+
+.modal.active {
     transform: translate(-50%, -50%) scale(1);
 }
 
